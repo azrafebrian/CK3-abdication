@@ -1,0 +1,88 @@
+﻿halfsade_abdicate_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_legitimacy.dds"
+	}
+	decision_group_type = personal
+	sort_order = 100
+	ai_check_interval = 0
+	cooldown = { years = 5 }
+
+	cost = {
+		prestige = 500
+	}
+
+	is_shown = {
+		is_ruler = yes
+	}
+
+	is_valid = {
+		custom_tooltip = {
+			text = halfsade_abdicate_has_heir_tt
+			exists = primary_heir
+		}
+
+		custom_tooltip = {
+			text = halfsade_abdicate_blocked_trait_tt
+			NOR = {
+				has_trait = ambitious
+				has_trait = greedy
+				has_trait = conqueror
+			}
+		}
+
+		custom_tooltip = {
+			text = halfsade_abdicate_heir_incapable_tt
+			primary_heir = { is_incapable = no }
+		}
+		custom_tooltip = {
+			text = halfsade_abdicate_heir_free_tt
+			primary_heir = { is_imprisoned = no }
+		}
+		custom_tooltip = {
+			text = halfsade_abdicate_heir_peace_tt
+			primary_heir = { NOT = { is_at_war_with = root } }
+		}
+		custom_tooltip = {
+			text = halfsade_abdicate_heir_not_rival_tt
+			primary_heir = { NOT = { has_relation_rival = root } }
+		}
+		custom_tooltip = {
+			text = halfsade_abdicate_heir_former_ruler_tt
+			primary_heir = {
+				NOT = { has_character_modifier = halfsade_abdicate_abdicated_modifier }
+			}
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		is_adult = yes
+		is_imprisoned = no
+		is_at_war = no
+		NOT = { has_character_modifier = halfsade_abdicate_pending_modifier }
+
+		custom_tooltip = {
+			text = halfsade_abdicate_self_capable_tt
+			is_incapable = no
+		}
+	}
+
+	effect = {
+		primary_heir = { save_scope_as = halfsade_abdicate_heir }
+		
+		if = {
+			limit = {
+				exists = primary_heir
+			}
+			custom_tooltip = {
+				text = halfsade_abdicate_title_effect
+			}
+		}
+		else = {
+			custom_tooltip = {
+				text = halfsade_abdicate_title_effect_no_heir
+			}
+		}
+
+		trigger_event = halfsade_abdicate.0001
+	}
+}

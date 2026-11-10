@@ -1,0 +1,37 @@
+﻿# cooldown until event 2
+halfsade_abdicate_pending_modifier = {
+	icon = stress_negative
+	vassal_opinion = -10
+	county_opinion_add = -5
+	stress_gain_mult = 0.1
+}
+
+# new character modifier
+halfsade_abdicate_transition_modifier = {
+	icon = legitimacy_negative
+	vassal_opinion = -5
+	county_opinion_add = -3
+}
+
+# new non-adult character modifier
+halfsade_abdicate_unready_modifier = {
+	icon = stress_negative
+	diplomacy = -2
+	martial = -2
+	stewardship = -2
+	intrigue = -2
+	learning = -2
+	stress_gain_mult = 0.25
+}
+
+# old character modifier
+halfsade_abdicate_retired_modifier = {
+	icon = treat_positive
+	stress_loss_mult = 0.25
+	monthly_piety = 0.5
+}
+
+# permanent disable old character for heir
+halfsade_abdicate_abdicated_modifier = {
+	icon = bird_mixed
+}

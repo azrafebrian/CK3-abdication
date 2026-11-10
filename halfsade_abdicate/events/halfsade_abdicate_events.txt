@@ -1,0 +1,104 @@
+﻿namespace = halfsade_abdicate
+
+# abdication - event page 1
+halfsade_abdicate.0001 = {
+	type = character_event
+	title = halfsade_abdicate.0001.t
+	desc = halfsade_abdicate.0001.desc
+	theme = realm
+	override_background = { reference = throne_room }
+
+	left_portrait = {
+		character = root
+		animation = personality_honorable
+	}
+	right_portrait = {
+		character = scope:halfsade_abdicate_heir
+		animation = admiration
+	}
+
+	immediate = {
+		primary_heir = { save_scope_as = halfsade_abdicate_heir }
+	}
+
+	option = {
+		name = halfsade_abdicate.0001.a
+
+		add_character_modifier = {
+			modifier = halfsade_abdicate_pending_modifier
+			days = 30
+		}
+		trigger_event = {
+			id = halfsade_abdicate.0002
+			days = 15
+		}
+	}
+
+	option = {
+		name = halfsade_abdicate.0001.b
+
+		add_stress = medium_stress_gain
+	}
+}
+
+# abdication - event page 2
+halfsade_abdicate.0002 = {
+	type = character_event
+	title = halfsade_abdicate.0002.t
+	desc = halfsade_abdicate.0002.desc
+	theme = realm
+	override_background = { reference = throne_room }
+
+	trigger = {
+		exists = primary_heir
+	}
+
+	left_portrait = {
+		character = root
+		animation = toast_goblet
+	}
+	right_portrait = {
+		character = scope:halfsade_abdicate_heir
+		animation = throne_room_bow_1
+	}
+
+	immediate = {
+		primary_heir = { save_scope_as = halfsade_abdicate_heir }
+	}
+
+	option = {
+		name = halfsade_abdicate.0002.a
+
+		remove_character_modifier = halfsade_abdicate_pending_modifier
+
+		depose = yes
+
+		add_character_modifier = {
+			modifier = halfsade_abdicate_abdicated_modifier
+		}
+
+		add_character_modifier = {
+			modifier = halfsade_abdicate_retired_modifier
+			years = 10
+		}
+
+		scope:halfsade_abdicate_heir = {
+			add_character_modifier = {
+				modifier = halfsade_abdicate_transition_modifier
+				years = 2
+			}
+			if = {
+				limit = { is_adult = no }
+				add_character_modifier = {
+					modifier = halfsade_abdicate_unready_modifier
+					years = 5
+				}
+			}
+		}
+
+		if = {
+			limit = { is_ai = no }
+			set_player_character = scope:halfsade_abdicate_heir
+		}
+	}
+}
